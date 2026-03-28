@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.moveax3.open-project</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>DE31E924-6C59-457E-BB49-97DF320ADA6B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7C357531-FF5D-49FC-86E4-89264CCA591D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Andrey Gaag</string>
+	<key>description</key>
+	<string>Open any project in your editor and terminal</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Open Project</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>proj</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+python3 list_projects.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>DE31E924-6C59-457E-BB49-97DF320ADA6B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+python3 open_project.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7C357531-FF5D-49FC-86E4-89264CCA591D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>7C357531-FF5D-49FC-86E4-89264CCA591D</key>
+		<dict>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>95</real>
+		</dict>
+		<key>DE31E924-6C59-457E-BB49-97DF320ADA6B</key>
+		<dict>
+			<key>xpos</key>
+			<real>160</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Projects</string>
+				<key>placeholder</key>
+				<string>~/Projects, ~/forks, ~/work</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Comma-separated list of directories to scan for projects</string>
+			<key>label</key>
+			<string>Project Directories</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>project_dirs</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>zed</string>
+				<key>placeholder</key>
+				<string>zed, code, cursor</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Editor command to open the project</string>
+			<key>label</key>
+			<string>Editor</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>editor_cmd</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>kitty</string>
+				<key>placeholder</key>
+				<string>kitty, wezterm, alacritty</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Terminal emulator command</string>
+			<key>label</key>
+			<string>Terminal</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>terminal_cmd</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>claude</string>
+				<key>placeholder</key>
+				<string>claude, aider, bash</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>CLI tool to launch inside terminal</string>
+			<key>label</key>
+			<string>CLI Tool</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>cli_tool</string>
+		</dict>
+	</array>
+	<key>webaddress</key>
+	<string>https://github.com/andreygaag</string>
+</dict>
+</plist>
