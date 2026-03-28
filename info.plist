@@ -48,7 +48,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>proj</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -108,7 +108,14 @@ python3 open_project.py "$1"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Type "proj" (or your custom keyword) in Alfred to list projects.
+
+- Type a name to filter (e.g. "proj api")
+- Type a path to browse (e.g. "proj ~/Desktop")
+- Press Enter to open in editor + terminal with CLI tool
+- Press Tab to autocomplete and drill into subdirectories
+
+Configure everything in Alfred Preferences -> Workflows -> Open Project -> Configure Workflow.</string>
 	<key>uidata</key>
 	<dict>
 		<key>7C357531-FF5D-49FC-86E4-89264CCA591D</key>
@@ -128,6 +135,27 @@ python3 open_project.py "$1"</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>proj</string>
+				<key>placeholder</key>
+				<string>proj, p, open</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword to trigger the workflow in Alfred</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -211,6 +239,27 @@ python3 open_project.py "$1"</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>cli_tool</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>__pycache__, node_modules, dist, build, target, venv, env, .venv, .env, vendor, coverage, tmp, temp, logs, log, src, public, app, lib, pkg, cmd, internal, static, templates, assets, migrations, tests, docs, scripts, config, configs</string>
+				<key>placeholder</key>
+				<string>node_modules, dist, build, venv, ...</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Comma-separated directory names to skip when scanning for projects</string>
+			<key>label</key>
+			<string>Skip Directories</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>skip_dirs</string>
 		</dict>
 	</array>
 	<key>webaddress</key>

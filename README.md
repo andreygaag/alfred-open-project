@@ -31,14 +31,16 @@ Open Alfred Preferences -> Workflows -> Open Project -> Configure Workflow:
 
 | Setting | Default | Description |
 |---|---|---|
+| Keyword | `proj` | Keyword to trigger the workflow in Alfred |
 | Project Directories | `~/Projects` | Comma-separated list of directories to scan |
 | Editor | `zed` | Editor command (`zed`, `code`, `cursor`) |
 | Terminal | `kitty` | Terminal command (`kitty`, `wezterm`, `alacritty`) |
 | CLI Tool | `claude` | CLI tool launched inside terminal (`claude`, `aider`, `bash`) |
+| Skip Directories | `node_modules, dist, ...` | Comma-separated directory names to skip when scanning |
 
 ## How it works
 
-- **Script Filter** scans configured directories (2 levels deep), skipping common non-project folders (`node_modules`, `__pycache__`, `dist`, etc.)
+- **Script Filter** scans configured directories (2 levels deep), skipping directories from the Skip Directories list
 - Paths starting with `~` or `/` switch to filesystem browsing mode with autocomplete
 - **Run Script** launches the editor and terminal as separate processes
 - Executables are resolved via `$PATH` and common install locations (`/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`)

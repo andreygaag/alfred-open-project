@@ -6,38 +6,39 @@ from pathlib import Path
 
 HOME = Path.home()
 
-SKIP = {
-    "__pycache__", "node_modules", "dist", "build", "target",
-    "venv", "env", ".venv", ".env", "vendor", "coverage",
-    "tmp", "temp", "logs", "log",
-    "src", "public", "app", "lib", "pkg", "cmd", "internal",
-    "static", "templates", "assets", "migrations", "tests",
-    "docs", "scripts", "config", "configs",
-}
+DEFAULT_SKIP = (
+    "__pycache__, node_modules, dist, build, target, "
+    "venv, env, .venv, .env, vendor, coverage, "
+    "tmp, temp, logs, log, "
+    "src, public, app, lib, pkg, cmd, internal, "
+    "static, templates, assets, migrations, tests, "
+    "docs, scripts, config, configs"
+)
 
 
-def get_root_dirs() -> list[str]:
-    raw = os.getenv("project_dirs", "~/Projects")
+def get_env_list(name: str, default: str) -> list[str]:
+    raw = os.getenv(name, default)
     return [d.strip() for d in raw.split(",") if d.strip()]
 
 
-def is_project_dir(path: Path) -> bool:
-    return path.is_dir() and not path.name.startswith(".") and path.name not in SKIP
+def is_project_dir(path: Path, skip: set[str]) -> bool:
+    return path.is_dir() and not path.name.startswith(".") and path.name not in skip
 
 
 def collect_projects() -> list[dict]:
+    skip = set(get_env_list("skip_dirs", DEFAULT_SKIP))
     items = []
-    for raw_dir in get_root_dirs():
+    for raw_dir in get_env_list("project_dirs", "~/Projects"):
         root = Path(raw_dir).expanduser().resolve()
         if not root.is_dir():
             continue
         items.append(make_item(root))
         for child in sorted(root.iterdir()):
-            if not is_project_dir(child):
+            if not is_project_dir(child, skip):
                 continue
             items.append(make_item(child))
             for grandchild in sorted(child.iterdir()):
-                if not is_project_dir(grandchild):
+                if not is_project_dir(grandchild, skip):
                     continue
                 items.append(make_item(grandchild))
     return items
