@@ -47,10 +47,17 @@ def main():
         print(str(e), file=sys.stderr)
         return
 
-    subprocess.Popen([editor_path, project_path])
+    devnull = subprocess.DEVNULL
+    subprocess.Popen(
+        [editor_path, project_path],
+        start_new_session=True, stdin=devnull, stdout=devnull, stderr=devnull,
+    )
 
     term_args = TERMINAL_ARGS.get(terminal, DEFAULT_TERMINAL_ARGS)(project_path, cli_path)
-    subprocess.Popen([terminal_path, *term_args])
+    subprocess.Popen(
+        [terminal_path, *term_args],
+        start_new_session=True, stdin=devnull, stdout=devnull, stderr=devnull,
+    )
 
 
 if __name__ == "__main__":
